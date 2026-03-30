@@ -9,6 +9,7 @@ LOG_FILE="$BASE_DIR/system.log"
 
 # ---------- LOAD CORE ----------
 source "$BASE_DIR/core.sh"
+source "$BASE_DIR/auto_update.sh"
 
 # ---------- COLORS ----------
 RED="\033[0;31m"
