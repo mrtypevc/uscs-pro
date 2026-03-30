@@ -5,7 +5,7 @@
 # ==============================
 
 BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
-UPDATE_INTERVAL=300   # 300 sec = 5 min
+UPDATE_INTERVAL=25   # 300 sec = 5 min
 
 AUTO_UPDATE_LOOP() {
     while true; do
