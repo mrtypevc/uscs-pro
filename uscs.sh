@@ -77,29 +77,30 @@ main_menu() {
     while true; do
         clear
         echo -e "${CYAN}==== USCS PRO CONTROL PANEL ====${NC}"
-        echo "1. System Info"
-        echo "2. File Manager"
-        echo "3. System Tools (PRO)"
-        echo "4. Service Manager"
-        echo "5. Minecraft Manager"
-        echo "6. Show Modules"
-        echo "7. Update System"
-        echo "8. Exit"
+            echo "1. System Info"
+            echo "2. File Manager"
+            echo "3. System Tools (PRO)"
+            echo "4. Service Manager"
+            echo "5. Minecraft Manager"
+            echo "6. Show Modules"
+            echo "7. Update System"
+            echo "8. Cloudflare Tunnel"
+            echo "0. Exit"
+            read -p "Select option: " opt
 
-        read -p "Select option: " choice
-
-        case $choice in
-            1) system_info ;;
-            2) file_manager ;;
-            3) system_tools_menu ;;
-            4) service_manager_menu ;;
-            5) minecraft_menu ;;
-            6) show_modules ;;
-            7) update_system ;;
-            8) exit ;;
-            *) echo "Invalid option"; sleep 1 ;;
-        esac
-    done
+    case $opt in
+        1) show_system_info ;;
+        2) show_file_manager ;;
+        3) show_system_tools ;;
+        4) show_service_manager ;;
+        5) show_minecraft_menu ;;
+        6) show_loaded_modules ;;
+        7) update_system ;;
+        9) show_cloudflare_menu ;;
+        0) exit 0 ;;
+        *) echo "Invalid option"; pause ;;
+     esac
+  done
 }
 
 # ---------- INIT ----------
