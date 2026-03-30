@@ -6,6 +6,7 @@
 
 MC_DIR="$BASE_DIR/minecraft"
 mkdir -p "$MC_DIR"
+source "$BASE_DIR/modules/service_manager.sh"
 
 # ---------- JAVA CHECK ----------
 check_java() {
