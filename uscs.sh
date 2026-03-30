@@ -78,16 +78,20 @@ main_menu() {
         echo -e "${CYAN}==== USCS PRO CONTROL PANEL ====${NC}"
         echo "1. System Info"
         echo "2. File Manager"
-        echo "3. Update System"
-        echo "4. Exit"
+        echo "3. System Tools (PRO)"
+        echo "4. Show Modules"
+        echo "5. Update System"
+        echo "6. Exit"
 
         read -p "Select option: " choice
 
         case $choice in
             1) system_info ;;
             2) file_manager ;;
-            3) update_system ;;
-            4) exit ;;
+            3) system_tools_menu ;;
+            4) show_modules ;;
+            5) update_system ;;
+            6) exit ;;
             *) echo "Invalid option"; sleep 1 ;;
         esac
     done
