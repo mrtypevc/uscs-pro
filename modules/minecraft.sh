@@ -87,7 +87,20 @@ start_mc_server() {
 
     if [ -d "$DIR" ]; then
         check_java
-        start_service "$name" "cd $DIR && java -Xmx1G -Xms512M -jar server.jar nogui"
+
+        echo "Starting Minecraft server..."
+
+        LOG_DIR="$BASE_DIR/logs"
+        PID_DIR="$BASE_DIR/services"
+
+        mkdir -p "$LOG_DIR"
+        mkdir -p "$PID_DIR"
+
+        nohup bash -c "cd $DIR && java -Xmx1G -Xms512M -jar server.jar nogui" > "$LOG_DIR/$name.log" 2>&1 &
+
+        echo $! > "$PID_DIR/$name.pid"
+
+        echo "Server '$name' started successfully!"
     else
         echo "Server not found!"
     fi
