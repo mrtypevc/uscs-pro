@@ -12,16 +12,24 @@ mkdir -p "$LOG_DIR"
 
 # ---------- START SERVICE ----------
 start_service() {
-    read -p "Service name: " name
-    read -p "Command to run: " cmd
+    local name="$1"
+    local cmd="$2"
+
+    # agar name empty ho tab hi pucho
+    if [ -z "$name" ]; then
+        read -p "Service name: " name
+    fi
+
+    if [ -z "$cmd" ]; then
+        read -p "Command to run: " cmd
+    fi
 
     nohup bash -c "$cmd" > "$LOG_DIR/$name.log" 2>&1 &
     echo $! > "$SERVICE_DIR/$name.pid"
 
     echo "Service '$name' started!"
-}
-
-# ---------- STOP SERVICE ----------
+    
+}# ---------- STOP SERVICE ----------
 stop_service() {
     ls "$SERVICE_DIR"
     read -p "Service name: " name
