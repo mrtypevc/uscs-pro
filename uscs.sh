@@ -79,9 +79,10 @@ main_menu() {
         echo "1. System Info"
         echo "2. File Manager"
         echo "3. System Tools (PRO)"
-        echo "4. Show Modules"
-        echo "5. Update System"
-        echo "6. Exit"
+        echo "4. Service Manager"
+        echo "5. Show Modules"
+        echo "6. Update System"
+        echo "7. Exit"
 
         read -p "Select option: " choice
 
@@ -89,9 +90,10 @@ main_menu() {
             1) system_info ;;
             2) file_manager ;;
             3) system_tools_menu ;;
-            4) show_modules ;;
-            5) update_system ;;
-            6) exit ;;
+            4) service_manager_menu ;;
+            5) show_modules ;;
+            6) update_system ;;
+            7) exit ;;
             *) echo "Invalid option"; sleep 1 ;;
         esac
     done
