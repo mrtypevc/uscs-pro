@@ -1,26 +1,30 @@
 #!/bin/bash
 
 # ==============================
-# USCS PRO CORE (FINAL FIX)
+# USCS PRO CORE (FINAL FIX 2)
 # ==============================
 
-# IMPORTANT: correct base dir
 BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 MODULES=()
 
-# ---------- REGISTER ----------
 register_module() {
     MODULES+=("$1")
 }
 
-# ---------- LOAD MODULES ----------
+# ---------- FORCE LOAD SERVICE MANAGER FIRST ----------
+load_core_modules() {
+    # sabse pehle service manager load karo (important)
+    if [ -f "$BASE_DIR/modules/service_manager.sh" ]; then
+        source "$BASE_DIR/modules/service_manager.sh"
+    fi
+}
+
+# ---------- LOAD ALL MODULES ----------
 load_modules() {
     if [ -d "$BASE_DIR/modules" ]; then
         for file in "$BASE_DIR/modules/"*.sh; do
-            if [ -f "$file" ]; then
-                source "$file"
-            fi
+            [ -f "$file" ] && source "$file"
         done
     fi
 }
@@ -29,20 +33,19 @@ load_modules() {
 load_plugins() {
     if [ -d "$BASE_DIR/plugins" ]; then
         for file in "$BASE_DIR/plugins/"*.sh; do
-            if [ -f "$file" ]; then
-                source "$file"
-            fi
+            [ -f "$file" ] && source "$file"
         done
     fi
 }
 
 # ---------- INIT ----------
 init_core() {
-    load_modules
+    load_core_modules   # 👈 FIRST
+    load_modules        # 👈 THEN others
     load_plugins
 }
 
-# ---------- SHOW MODULES ----------
+# ---------- SHOW ----------
 show_modules() {
     echo "Loaded Modules:"
     for m in "${MODULES[@]}"; do
