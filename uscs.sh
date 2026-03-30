@@ -6,6 +6,7 @@
 
 BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
 LOG_FILE="$BASE_DIR/system.log"
+source "$BASE_DIR/core.sh"
 
 # ---------- COLORS ----------
 RED="\033[0;31m"
