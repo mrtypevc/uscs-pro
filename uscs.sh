@@ -4,9 +4,20 @@
 # USCS PRO - BASE SYSTEM (STEP 1)
 # ==============================
 
+BASE_DIR="$HOME/uscs-pro"
+
 BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
 LOG_FILE="$BASE_DIR/system.log"
 source "$BASE_DIR/core.sh"
+
+# Load modules
+source "$BASE_DIR/modules/minecraft.sh"
+source "$BASE_DIR/modules/system_tools.sh"
+source "$BASE_DIR/modules/cloudflare_tunnel.sh"
+
+pause() { read -p "Press Enter to continue..."; }
+
+while true; do
 
 # ---------- COLORS ----------
 RED="\033[0;31m"
