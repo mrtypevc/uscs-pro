@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ==============================
-# USCS PRO CORE (FINAL FIX 2)
+# USCS PRO CORE (FINAL WORKING)
 # ==============================
 
 BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -12,37 +12,28 @@ register_module() {
     MODULES+=("$1")
 }
 
-# ---------- FORCE LOAD SERVICE MANAGER FIRST ----------
-load_core_modules() {
-    # sabse pehle service manager load karo (important)
-    if [ -f "$BASE_DIR/modules/service_manager.sh" ]; then
-        source "$BASE_DIR/modules/service_manager.sh"
-    fi
-}
-
-# ---------- LOAD ALL MODULES ----------
+# ---------- LOAD ALL MODULES (SAFE) ----------
 load_modules() {
     if [ -d "$BASE_DIR/modules" ]; then
-        for file in "$BASE_DIR/modules/"*.sh; do
-            [ -f "$file" ] && source "$file"
-        done
-    fi
-}
+        
+        # Pehle service manager load karo (dependency)
+        if [ -f "$BASE_DIR/modules/service_manager.sh" ]; then
+            source "$BASE_DIR/modules/service_manager.sh"
+        fi
 
-# ---------- LOAD PLUGINS ----------
-load_plugins() {
-    if [ -d "$BASE_DIR/plugins" ]; then
-        for file in "$BASE_DIR/plugins/"*.sh; do
-            [ -f "$file" ] && source "$file"
+        # Baaki modules load karo
+        for file in "$BASE_DIR/modules/"*.sh; do
+            # skip service_manager (already loaded)
+            if [[ "$file" != *"service_manager.sh" ]]; then
+                [ -f "$file" ] && source "$file"
+            fi
         done
     fi
 }
 
 # ---------- INIT ----------
 init_core() {
-    load_core_modules   # 👈 FIRST
-    load_modules        # 👈 THEN others
-    load_plugins
+    load_modules
 }
 
 # ---------- SHOW ----------
