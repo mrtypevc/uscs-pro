@@ -13,7 +13,6 @@ start_cloudflare_tunnel() {
 
     read -p "Enter subdomain (optional, leave blank for random): " subdomain
 
-    # Check cloudflared
     if ! command -v cloudflared >/dev/null 2>&1; then
         echo "Installing cloudflared..."
         pkg install cloudflared -y
