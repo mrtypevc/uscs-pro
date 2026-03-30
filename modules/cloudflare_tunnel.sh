@@ -11,9 +11,9 @@ start_cloudflare_tunnel() {
         return
     fi
 
-    read -p "Enter subdomain name (yourname.example.com) or leave blank for random: " subdomain
+    read -p "Enter subdomain (optional, leave blank for random): " subdomain
 
-    # Check if cloudflared exists
+    # Check cloudflared
     if ! command -v cloudflared >/dev/null 2>&1; then
         echo "Installing cloudflared..."
         pkg install cloudflared -y
@@ -29,7 +29,7 @@ start_cloudflare_tunnel() {
         nohup cloudflared tunnel --url "tcp://localhost:25565" --hostname "$subdomain" > "$LOG_DIR/${name}_tunnel.log" 2>&1 &
     fi
 
-    echo "Tunnel started! Check logs/$name_tunnel.log for public URL."
+    echo "Tunnel started! Check logs/${name}_tunnel.log for public URL."
     pause
 }
 
