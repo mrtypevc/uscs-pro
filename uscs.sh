@@ -103,6 +103,7 @@ main_menu() {
 # ---------- INIT ----------
 init() {
     log_info "USCS PRO Started"
+    init_core
 }
 
 # ---------- START ----------
