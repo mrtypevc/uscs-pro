@@ -1,38 +1,48 @@
 #!/bin/bash
 
-BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# ==============================
+# USCS PRO CORE (FINAL FIX)
+# ==============================
+
+# IMPORTANT: correct base dir
+BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 MODULES=()
 
+# ---------- REGISTER ----------
 register_module() {
     MODULES+=("$1")
 }
 
+# ---------- LOAD MODULES ----------
 load_modules() {
-    MODULE_PATH="$BASE_DIR/modules"
-
-    if [ -d "$MODULE_PATH" ]; then
-        for file in "$MODULE_PATH"/*.sh; do
-            [ -f "$file" ] && source "$file"
+    if [ -d "$BASE_DIR/modules" ]; then
+        for file in "$BASE_DIR/modules/"*.sh; do
+            if [ -f "$file" ]; then
+                source "$file"
+            fi
         done
     fi
 }
 
+# ---------- LOAD PLUGINS ----------
 load_plugins() {
-    PLUGIN_PATH="$BASE_DIR/plugins"
-
-    if [ -d "$PLUGIN_PATH" ]; then
-        for file in "$PLUGIN_PATH"/*.sh; do
-            [ -f "$file" ] && source "$file"
+    if [ -d "$BASE_DIR/plugins" ]; then
+        for file in "$BASE_DIR/plugins/"*.sh; do
+            if [ -f "$file" ]; then
+                source "$file"
+            fi
         done
     fi
 }
 
+# ---------- INIT ----------
 init_core() {
     load_modules
     load_plugins
 }
 
+# ---------- SHOW MODULES ----------
 show_modules() {
     echo "Loaded Modules:"
     for m in "${MODULES[@]}"; do
